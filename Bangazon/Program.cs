@@ -11,7 +11,7 @@ namespace Bangazon
     static void Main(string[] args)
     {
       Terminal UI = new Terminal();
-      Console.WriteLine(UI.getMainMenu());
+      Console.Write(UI.getMainMenu());
       Console.Read();
     }
   }
