@@ -1,0 +1,5 @@
+C:\Users\Martin\workspace\day12\Bangazon\Bangazon\bin\Debug\Bangazon.exe.config
+C:\Users\Martin\workspace\day12\Bangazon\Bangazon\bin\Debug\Bangazon.exe
+C:\Users\Martin\workspace\day12\Bangazon\Bangazon\bin\Debug\Bangazon.pdb
+C:\Users\Martin\workspace\day12\Bangazon\Bangazon\obj\Debug\Bangazon.exe
+C:\Users\Martin\workspace\day12\Bangazon\Bangazon\obj\Debug\Bangazon.pdb
