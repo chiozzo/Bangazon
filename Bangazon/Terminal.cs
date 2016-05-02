@@ -23,5 +23,13 @@ namespace Bangazon
       menu.Append("> ");
       return menu.ToString();
     }
+
+    public string getCustomerName()
+    {
+      StringBuilder name = new StringBuilder();
+      name.AppendLine("Enter customer name");
+      name.Append("> ");
+      return name.ToString();
+    }
   }
 }
