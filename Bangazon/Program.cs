@@ -12,7 +12,15 @@ namespace Bangazon
     {
       Terminal UI = new Terminal();
       Console.Write(UI.getMainMenu());
-      Console.Read();
+      string stringInput = Console.ReadLine();
+      int menuSelection = Convert.ToInt32(stringInput);
+      switch (menuSelection)
+      {
+        case 1: Customer newCustomer = UI.createNewCustomer();
+          // need to insert this new object into the DB.
+          newCustomer.insertCustomer();
+          break;
+      }
     }
   }
 }

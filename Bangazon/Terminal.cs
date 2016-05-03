@@ -24,6 +24,50 @@ namespace Bangazon
       return menu.ToString();
     }
 
+    public Customer createNewCustomer()
+    {
+      // Customer Name
+      Customer newCustomer = new Customer();
+      Console.Write(this.getCustomerName());
+      string customerName = Console.ReadLine();
+      string[] customerNameArray = customerName.Split(' ');
+      newCustomer.FirstName = customerNameArray[0];
+      newCustomer.LastName = customerNameArray[1];
+
+      // Customer Address
+      Console.Write(this.getCustomerStreetAddress());
+      string customerAddress = Console.ReadLine();
+      string[] customerAddressArray = customerAddress.Split(' ');
+      newCustomer.StreetNumber = customerAddressArray[0];
+      StringBuilder streetName = new StringBuilder();
+      for (int i = 1; i < customerAddressArray.Length; i++)
+      {
+        streetName.Append(customerAddressArray[i]);
+        streetName.Append(" ");
+      }
+      newCustomer.StreetName = streetName.ToString();
+
+      // Customer City
+      Console.Write(this.getCustomerCity());
+      newCustomer.City = Console.ReadLine();
+
+      // Customer State
+      Console.Write(this.getCustomerState());
+      newCustomer.State = Console.ReadLine();
+
+      // Customer Zip Code
+      Console.Write(this.getCustomerZipCode());
+      string customerZipCode = Console.ReadLine();
+      newCustomer.ZipCode = Convert.ToInt32(customerZipCode);
+
+      // Customer Phone Number
+      Console.Write(this.getCustomerPhoneNumber());
+      string customerPhoneNumber = Console.ReadLine();
+      newCustomer.PhoneNumber = Convert.ToDouble(customerPhoneNumber);
+
+      return newCustomer;
+    }
+
     public string getCustomerName()
     {
       StringBuilder name = new StringBuilder();
