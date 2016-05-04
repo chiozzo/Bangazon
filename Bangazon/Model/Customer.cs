@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace Bangazon
 {
-  class Customer
+  public class Customer
   {
     public int CustomerId { get; set; }
     public string FirstName { get; set; }
