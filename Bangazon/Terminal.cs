@@ -293,5 +293,45 @@ namespace Bangazon
       sqlConnection1.Close();
     }
 
+    public string getProductPopularity()
+    {
+      StringBuilder queryCommand = new StringBuilder();
+      queryCommand.Append("SELECT ");
+      queryCommand.Append("Product.Name, ");
+      queryCommand.Append("Count(ProductOrder.ProductOrderId) as CountOfOrders, ");
+      queryCommand.Append("Count(DISTINCT ProductOrder.CustomerId) as CountOfCustomers,");
+      queryCommand.Append("Sum(Product.Price) as TotalRevenue ");
+      queryCommand.Append("FROM ProductOrder ");
+      queryCommand.Append("LEFT JOIN Product ON ProductOrder.ProductId = Product.ProductId ");
+      queryCommand.Append("WHERE ProductOrder.Completed = 1 ");
+      queryCommand.Append("GROUP BY Product.Name, ProductOrder.CustomerId");
+
+      SqlConnection connection = new SqlConnection(connectionString);
+      string stringQuery = queryCommand.ToString();
+      SqlCommand cmd = new SqlCommand(stringQuery, connection);
+      connection.Open();
+      SqlDataReader reader = cmd.ExecuteReader();
+
+      StringBuilder popularity = new StringBuilder();
+
+      if (reader.HasRows)
+      {
+        while (reader.Read())
+        {
+          //AA Batteries ordered 10 times by 2 customers for total revenue of $99.90
+          popularity.Append(reader[0]);
+          popularity.Append(" ordered ");
+          popularity.Append(reader[1]);
+          popularity.Append(" times by ");
+          popularity.Append(reader[2]);
+          popularity.Append(" customers for a total revenue of $");
+          popularity.Append(reader[3]);
+          popularity.AppendLine(".");
+        }
+      }
+
+      return popularity.ToString();
+    }
+
   }
 }
