@@ -13,17 +13,17 @@ namespace Bangazon
 
     public string getMainMenu()
     {
-      StringBuilder menu = new StringBuilder();
-      menu.AppendLine("*********************************************************");
-      menu.AppendLine("**  Welcome to Bangazon! Command Line Ordering System  **");
-      menu.AppendLine("*********************************************************");
-      menu.AppendLine("1. Create an account");
-      menu.AppendLine("2. Create a payment option");
-      menu.AppendLine("3. Order a product");
-      menu.AppendLine("4. Complete an order");
-      menu.AppendLine("5. See product popularity");
-      menu.AppendLine("Type 'exit' to leave Bangazon");
-      menu.Append("> ");
+      StringBuilder menu = new StringBuilder()
+        .AppendLine("*********************************************************")
+        .AppendLine("**  Welcome to Bangazon! Command Line Ordering System  **")
+        .AppendLine("*********************************************************")
+        .AppendLine("1. Create an account")
+        .AppendLine("2. Create a payment option")
+        .AppendLine("3. Order a product")
+        .AppendLine("4. Complete an order")
+        .AppendLine("5. See product popularity")
+        .AppendLine("Type 'exit' to leave Bangazon")
+        .Append("> ");
       return menu.ToString();
     }
 
@@ -46,8 +46,8 @@ namespace Bangazon
       StringBuilder streetName = new StringBuilder();
       for (int i = 1; i < customerAddressArray.Length; i++)
       {
-        streetName.Append(customerAddressArray[i]);
-        streetName.Append(" ");
+        streetName.Append(customerAddressArray[i])
+          .Append(" ");
       }
       newCustomer.StreetName = streetName.ToString();
 
@@ -74,59 +74,59 @@ namespace Bangazon
 
     public string getCustomerName()
     {
-      StringBuilder name = new StringBuilder();
-      name.AppendLine("Enter customer name");
-      name.Append("> ");
+      StringBuilder name = new StringBuilder()
+        .AppendLine("Enter customer name")
+        .Append("> ");
       return name.ToString();
     }
 
     public string getCustomerStreetAddress()
     {
-      StringBuilder addy = new StringBuilder();
-      addy.AppendLine("Enter street address");
-      addy.Append("> ");
+      StringBuilder addy = new StringBuilder()
+        .AppendLine("Enter street address")
+        .Append("> ");
       return addy.ToString();
     }
 
     public string getCustomerCity()
     {
-      StringBuilder city = new StringBuilder();
-      city.AppendLine("Enter city");
-      city.Append("> ");
+      StringBuilder city = new StringBuilder()
+        .AppendLine("Enter city")
+        .Append("> ");
       return city.ToString();
     }
 
     public string getCustomerState()
     {
-      StringBuilder state = new StringBuilder();
-      state.AppendLine("Enter state");
-      state.Append("> ");
+      StringBuilder state = new StringBuilder()
+        .AppendLine("Enter state")
+        .Append("> ");
       return state.ToString();
     }
 
     public string getCustomerZipCode()
     {
-      StringBuilder zip = new StringBuilder();
-      zip.AppendLine("Enter postal code");
-      zip.Append("> ");
+      StringBuilder zip = new StringBuilder()
+        .AppendLine("Enter postal code")
+        .Append("> ");
       return zip.ToString();
     }
 
     public string getCustomerPhoneNumber()
     {
-      StringBuilder phone = new StringBuilder();
-      phone.AppendLine("Enter phone number");
-      phone.Append("> ");
+      StringBuilder phone = new StringBuilder()
+        .AppendLine("Enter phone number")
+        .Append("> ");
       return phone.ToString();
     }
 
     public string getCustomerOptions()
     {
-      StringBuilder queryCommand = new StringBuilder();
-      queryCommand.Append("SELECT CustomerId, Firstname + ' ' + LastName AS FullName FROM Customer");
+      StringBuilder queryCommand = new StringBuilder()
+        .Append("SELECT CustomerId, Firstname + ' ' + LastName AS FullName FROM Customer");
 
-      StringBuilder customerOptions = new StringBuilder();
-      customerOptions.AppendLine("Which customer?");
+      StringBuilder customerOptions = new StringBuilder()
+        .AppendLine("Which customer?");
 
       SqlConnection connection = new SqlConnection(connectionString);
       SqlCommand cmd = new SqlCommand(queryCommand.ToString(), connection);
@@ -162,29 +162,57 @@ namespace Bangazon
 
     public string getNewPaymentType()
     {
-      StringBuilder payment = new StringBuilder();
-      payment.AppendLine("Enter payment type (e.g.AmEx, Visa, MasterCard, Discover)");
-      payment.Append("> ");
+      StringBuilder payment = new StringBuilder()
+        .AppendLine("Enter payment type (e.g.AmEx, Visa, MasterCard, Discover)")
+        .Append("> ");
       return payment.ToString();
     }
 
     public string getNewAccountNumber()
     {
-      StringBuilder account = new StringBuilder();
-      account.AppendLine("Enter account number");
-      account.Append("> ");
+      StringBuilder account = new StringBuilder()
+        .AppendLine("Enter account number")
+        .Append("> ");
       return account.ToString();
+    }
+    
+    public string getPaymentOptions(int CustomerId)
+    {
+      StringBuilder queryCommand = new StringBuilder()
+        .Append("SELECT PaymentMethodId, PaymentType ")
+        .Append("FROM PaymentMethod ")
+        .Append("WHERE CustomerId = " + CustomerId);
+
+      SqlConnection connection = new SqlConnection(connectionString);
+      string stringQuery = queryCommand.ToString();
+      SqlCommand cmd = new SqlCommand(stringQuery, connection);
+      connection.Open();
+      SqlDataReader reader = cmd.ExecuteReader();
+
+      StringBuilder paymentOptions = new StringBuilder()
+        .AppendLine("Please select your payment method.");
+
+      if (reader.HasRows)
+      {
+        while (reader.Read())
+        {
+          paymentOptions.AppendLine(reader[0] + ". " + reader[1]);
+        }
+      }
+
+      paymentOptions.Append("> ");
+      return paymentOptions.ToString();
     }
 
     /** PRODUCTS SECTION **/
 
     public string showProductsToOrder()
     {
-      StringBuilder queryCommand = new StringBuilder();
-      queryCommand.Append("SELECT ProductId, Name, Price FROM Product");
+      StringBuilder queryCommand = new StringBuilder()
+        .Append("SELECT ProductId, Name, Price FROM Product");
 
-      StringBuilder productOptions = new StringBuilder();
-      productOptions.AppendLine("Here is a list of our heroes you can order:");
+      StringBuilder productOptions = new StringBuilder()
+        .AppendLine("Here is a list of our heroes you can order:");
 
       SqlConnection connection = new SqlConnection(connectionString);
       SqlCommand cmd = new SqlCommand(queryCommand.ToString(), connection);
@@ -196,26 +224,26 @@ namespace Bangazon
         // Read advances to the next row.
         while (reader.Read())
         {
-          productOptions.AppendLine(reader[0] + ". " + reader[1]);
-          productOptions.AppendLine("    (" + reader[2] + ")");
+          productOptions.AppendLine(reader[0] + ". " + reader[1])
+            .AppendLine("    (" + reader[2] + ")");
         }
-        productOptions.Append("0. BACK TO MAIN MENU");
-        productOptions.Append("> ");
+        productOptions.Append("0. BACK TO MAIN MENU")
+          .Append("> ");
       }
       return productOptions.ToString();
     }
 
     public string getCustomerOrderSummary(int CustomerId)
     {
-      StringBuilder queryCommand = new StringBuilder();
-      queryCommand.Append("SELECT Product.Name, Product.Price ");
-      queryCommand.Append("FROM ProductOrder ");
-      queryCommand.Append("LEFT JOIN Product ON ProductOrder.ProductId = Product.ProductId ");
-      queryCommand.Append("WHERE ProductOrder.CustomerId = " + CustomerId);
-      queryCommand.Append(" AND ProductOrder.Completed = 0");
+      StringBuilder queryCommand = new StringBuilder()
+        .Append("SELECT Product.Name, Product.Price ")
+        .Append("FROM ProductOrder ")
+        .Append("LEFT JOIN Product ON ProductOrder.ProductId = Product.ProductId ")
+        .Append("WHERE ProductOrder.CustomerId = " + CustomerId)
+        .Append(" AND ProductOrder.Completed = 0");
 
-      StringBuilder orderSummary = new StringBuilder();
-      orderSummary.Append("These heroes can rush your way to rescue you for a nominal fee of $");
+      StringBuilder orderSummary = new StringBuilder()
+        .Append("These heroes can rush your way to rescue you for a nominal fee of $");
 
       SqlConnection connection = new SqlConnection(connectionString);
       string stringQuery = queryCommand.ToString();
@@ -234,8 +262,8 @@ namespace Bangazon
           orderedHeroes.AppendLine(reader[0].ToString());
         }
         string stringOrderTotal = Convert.ToString(productOrderTotal);
-        orderSummary.Append(stringOrderTotal);
-        orderSummary.AppendLine(":");
+        orderSummary.Append(stringOrderTotal)
+          .AppendLine(":");
       }
       else
       {
@@ -245,41 +273,13 @@ namespace Bangazon
 
       return orderSummary.ToString();
     }
-    
-    public string getPaymentOptions(int CustomerId)
-    {
-      StringBuilder queryCommand = new StringBuilder();
-      queryCommand.Append("SELECT PaymentMethodId, PaymentType ");
-      queryCommand.Append("FROM PaymentMethod ");
-      queryCommand.Append("WHERE CustomerId = " + CustomerId);
-
-      SqlConnection connection = new SqlConnection(connectionString);
-      string stringQuery = queryCommand.ToString();
-      SqlCommand cmd = new SqlCommand(stringQuery, connection);
-      connection.Open();
-      SqlDataReader reader = cmd.ExecuteReader();
-
-      StringBuilder paymentOptions = new StringBuilder();
-      paymentOptions.AppendLine("Please select your payment method.");
-
-      if (reader.HasRows)
-      {
-        while (reader.Read())
-        {
-          paymentOptions.AppendLine(reader[0] + ". " + reader[1]);
-        }
-      }
-
-      paymentOptions.Append("> ");
-      return paymentOptions.ToString();
-    }
 
     public void completeProductOrders(int selectedPaymentMethod, int CustomerId)
     {
-      StringBuilder updateCommand = new StringBuilder();
-      updateCommand.Append("UPDATE ProductOrder ");
-      updateCommand.Append("SET Completed = 1, PaymentMethodId = " + selectedPaymentMethod);
-      updateCommand.Append("WHERE CustomerId = " + CustomerId);
+      StringBuilder updateCommand = new StringBuilder()
+        .Append("UPDATE ProductOrder ")
+        .Append("SET Completed = 1, PaymentMethodId = " + selectedPaymentMethod)
+        .Append("WHERE CustomerId = " + CustomerId);
 
       SqlConnection sqlConnection1 = new SqlConnection(connectionString);
 
@@ -295,16 +295,16 @@ namespace Bangazon
 
     public string getProductPopularity()
     {
-      StringBuilder queryCommand = new StringBuilder();
-      queryCommand.Append("SELECT ");
-      queryCommand.Append("Product.Name, ");
-      queryCommand.Append("Count(ProductOrder.ProductOrderId) as CountOfOrders, ");
-      queryCommand.Append("Count(DISTINCT ProductOrder.CustomerId) as CountOfCustomers,");
-      queryCommand.Append("Sum(Product.Price) as TotalRevenue ");
-      queryCommand.Append("FROM ProductOrder ");
-      queryCommand.Append("LEFT JOIN Product ON ProductOrder.ProductId = Product.ProductId ");
-      queryCommand.Append("WHERE ProductOrder.Completed = 1 ");
-      queryCommand.Append("GROUP BY Product.Name, ProductOrder.CustomerId");
+      StringBuilder queryCommand = new StringBuilder()
+        .Append("SELECT ")
+        .Append("Product.Name, ")
+        .Append("Count(ProductOrder.ProductOrderId) as CountOfOrders, ")
+        .Append("Count(DISTINCT ProductOrder.CustomerId) as CountOfCustomers,")
+        .Append("Sum(Product.Price) as TotalRevenue ")
+        .Append("FROM ProductOrder ")
+        .Append("LEFT JOIN Product ON ProductOrder.ProductId = Product.ProductId ")
+        .Append("WHERE ProductOrder.Completed = 1 ")
+        .Append("GROUP BY Product.Name, ProductOrder.CustomerId");
 
       SqlConnection connection = new SqlConnection(connectionString);
       string stringQuery = queryCommand.ToString();
@@ -319,14 +319,14 @@ namespace Bangazon
         while (reader.Read())
         {
           //AA Batteries ordered 10 times by 2 customers for total revenue of $99.90
-          popularity.Append(reader[0]);
-          popularity.Append(" ordered ");
-          popularity.Append(reader[1]);
-          popularity.Append(" times by ");
-          popularity.Append(reader[2]);
-          popularity.Append(" customers for a total revenue of $");
-          popularity.Append(reader[3]);
-          popularity.AppendLine(".");
+          popularity.Append(reader[0])
+            .Append(" ordered ")
+            .Append(reader[1])
+            .Append(" times by ")
+            .Append(reader[2])
+            .Append(" customers for a total revenue of $")
+            .Append(reader[3])
+            .AppendLine(".");
         }
       }
 

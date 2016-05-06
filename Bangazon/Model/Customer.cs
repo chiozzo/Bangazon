@@ -23,24 +23,24 @@ namespace Bangazon
     {
       string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Bangazon;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-      StringBuilder insertCommand = new StringBuilder();
-      insertCommand.Append("INSERT INTO Customer (FirstName, LastName, StreetNumber, StreetName, City, State, ZipCode, PhoneNumber) VALUES (");
-      insertCommand.Append("'" + this.FirstName + "'");
-      insertCommand.Append(", ");
-      insertCommand.Append("'" + this.LastName + "'");
-      insertCommand.Append(", ");
-      insertCommand.Append("'" + this.StreetNumber + "'");
-      insertCommand.Append(", ");
-      insertCommand.Append("'" + this.StreetName + "'");
-      insertCommand.Append(", ");
-      insertCommand.Append("'" + this.City + "'");
-      insertCommand.Append(", ");
-      insertCommand.Append("'" + this.State + "'");
-      insertCommand.Append(", ");
-      insertCommand.Append(this.ZipCode);
-      insertCommand.Append(", ");
-      insertCommand.Append(this.PhoneNumber);
-      insertCommand.Append(")");
+      StringBuilder insertCommand = new StringBuilder()
+        .Append("INSERT INTO Customer (FirstName, LastName, StreetNumber, StreetName, City, State, ZipCode, PhoneNumber) VALUES (")
+        .Append("'" + this.FirstName + "'")
+        .Append(", ")
+        .Append("'" + this.LastName + "'")
+        .Append(", ")
+        .Append("'" + this.StreetNumber + "'")
+        .Append(", ")
+        .Append("'" + this.StreetName + "'")
+        .Append(", ")
+        .Append("'" + this.City + "'")
+        .Append(", ")
+        .Append("'" + this.State + "'")
+        .Append(", ")
+        .Append(this.ZipCode)
+        .Append(", ")
+        .Append(this.PhoneNumber)
+        .Append(")");
 
       SqlConnection sqlConnection1 = new SqlConnection(connectionString);
 

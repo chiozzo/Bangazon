@@ -21,12 +21,12 @@ namespace Bangazon
 
     public void insertProductOrder()
     {
-      StringBuilder insertCommand = new StringBuilder();
-      insertCommand.Append("INSERT INTO ProductOrder (CustomerId, ProductId) VALUES (");
-      insertCommand.Append(this.CustomerId);
-      insertCommand.Append(", ");
-      insertCommand.Append(this.ProductId);
-      insertCommand.Append(")");
+      StringBuilder insertCommand = new StringBuilder()
+        .Append("INSERT INTO ProductOrder (CustomerId, ProductId) VALUES (")
+        .Append(this.CustomerId)
+        .Append(", ")
+        .Append(this.ProductId)
+        .Append(")");
 
       SqlConnection sqlConnection1 = new SqlConnection(connectionString);
 

@@ -18,14 +18,14 @@ namespace Bangazon
     {
       string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Bangazon;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-      StringBuilder insertCommand = new StringBuilder();
-      insertCommand.Append("INSERT INTO PaymentMethod (CustomerId, PaymentType, AccountNumber) VALUES (");
-      insertCommand.Append(this.CustomerId);
-      insertCommand.Append(", ");
-      insertCommand.Append("'" + this.PaymentType + "'");
-      insertCommand.Append(", ");
-      insertCommand.Append(this.AccountNumber);
-      insertCommand.Append(")");
+      StringBuilder insertCommand = new StringBuilder()
+        .Append("INSERT INTO PaymentMethod (CustomerId, PaymentType, AccountNumber) VALUES (")
+        .Append(this.CustomerId)
+        .Append(", ")
+        .Append("'" + this.PaymentType + "'")
+        .Append(", ")
+        .Append(this.AccountNumber)
+        .Append(")");
 
       SqlConnection sqlConnection1 = new SqlConnection(connectionString);
 
