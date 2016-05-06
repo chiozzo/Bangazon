@@ -9,6 +9,8 @@ namespace Bangazon
 {
   public class Customer
   {
+    public string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Bangazon;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
     public int CustomerId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -21,8 +23,6 @@ namespace Bangazon
 
     public void insertCustomer()
     {
-      string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Bangazon;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
       StringBuilder insertCommand = new StringBuilder()
         .Append("INSERT INTO Customer (FirstName, LastName, StreetNumber, StreetName, City, State, ZipCode, PhoneNumber) VALUES (")
         .Append("'" + this.FirstName + "'")

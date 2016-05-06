@@ -9,6 +9,8 @@ namespace Bangazon
 {
   public class PaymentMethod
   {
+    string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Bangazon;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
     public int PaymentMethodId { get; set; }
     public int CustomerId { get; set; }
     public string PaymentType { get; set; }
@@ -16,8 +18,6 @@ namespace Bangazon
 
     public void insertPaymentMethod()
     {
-      string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Bangazon;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
       StringBuilder insertCommand = new StringBuilder()
         .Append("INSERT INTO PaymentMethod (CustomerId, PaymentType, AccountNumber) VALUES (")
         .Append(this.CustomerId)
